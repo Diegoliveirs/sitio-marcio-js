@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservas </title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  
+<div id="tela-login" class="container">
+  <h1>Login</h1>
+  <form id="form-login">
+    <input type="text" id="usuario-login" placeholder="Usuário" required/>
+    <input type="password" id="senha-login" placeholder="Senha" required/>
+    <button type="submit">Entrar</button>
+  </form>
+</div>
+
+ <div id="tela-menu" class="container" style="display: none;">
+  <h1>Menu</h1>
+  <button id="btn-cadastro-usuario" class="menu-button" onclick="mostrarTelaCadastroUsuario()" style="display: none;">Cadastrar Usuários</button>
+  <button class="menu-button" onclick="mostrarTelaCadastroReserva()">Cadastrar Reservas</button>
+  <button class="menu-button" onclick="mostrarTelaListarReservas()">Listar Reservas</button>
+  <button class="menu-button" onclick="mostrarTelaCalendario()">Voltar</button>
+</div>
+
+
+<div id="tela-calendario" class="container" style="display: none;">
+  <div class="calendario">
+    <div class="calendario-header">
+      <button id="mes-anterior">&lt;</button>
+      <h2 id="mes-atual"></h2>
+      <button id="proximo-mes">&gt;</button>
+    </div>
+    <div class="dias-semana">
+      <span>Dom</span>
+      <span>Seg</span>
+      <span>Ter</span>
+      <span>Qua</span>
+      <span>Qui</span>
+      <span>Sex</span>
+      <span>Sab</span>
+    </div>
+    <div class="calendario-dias" id="calendario-dias"></div>
+  </div>
+</div>
+
+    <div class="calendario-rodape" id="rodape">
+      <button class="rodape-icone" onclick="voltarAoMenu()">
+        <i class="fa fa-jelly fa-regular fa-bars"></i>
+      </button>
+      <button class="rodape-icone ativo-icone" onclick="mostrarTelaCalendario()">
+        <i class="fa fa-jelly fa-regular fa-calendar"></i>
+      </button>
+      <button class="rodape-icone" onclick="mostrarTelaConfiguracoes()">
+        <i class="fa fa-jelly fa-regular fa-cog"></i>
+      </button>
+    </div>
+
+<div id="tela-cadastro-reserva" class="container" style="display: none;">
+  <form id="form-reserva">
+  <h1>Cadastrar Reserva</h1>
+    <input type="text" id="nomecliente" placeholder="Nome do Cliente"/>
+    <input type="number" id="telefone" placeholder="Telefone"/>
+    <input type="date" id="data-entrada" placeholder="Data de Entrada"/>
+    <input type="date" id="data-saida" placeholder="Data de Saída"/>
+    <input type="number" id="diaria" placeholder="Valor da Diária"/>
+    <input type="text" id="observacao" placeholder="Observações"/>
+    <button type="submit">Cadastrar</button>
+  </form>
+  <button id="bt-voltar-cadastro-reserva" onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
+</div>
+
+<div id="tela-cadastro-usuarios" class="container" style="display: none;">
+  <form id="form-usuario">
+    <h1>Cadastrar Usuário</h1>
+    <input type="text" id="nomeusuario" placeholder="Nome"/>
+    <input type="text" id="usuario-cadastro" placeholder="Usuário"/>
+    <input type="password" id="senha-cadastro" placeholder="Senha"/>
+    <button type="submit">Cadastrar</button>
+  </form>
+  <button onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
+</div>
+
+<div id="tela-listar-reservas" class="container" style="display: none;">
+  <h1>Reservas Cadastradas</h1>
+  <table id="tabela-reservas">
+    <thead>
+      <tr>
+        <th>Nome Cliente</th>
+        <th>Telefone</th>
+        <th>Data de Entrada</th>
+        <th>Data de Saída</th>
+        <th>Valor da Diária</th>
+        <th>Observações</th>
+      </tr>
+    </thead>
+    <tbody>  
+        </tbody>
+  </table>
+  <button id="bt-voltar-menu-listar" onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
+</div>
+
+<div id="tela-detalhes-reserva" class="container" style="display: none;">
+  <h1>Detalhes da Reserva</h1>
+  <table id="tabela-detalhes-reserva">
+    <thead>
+      <tr>
+        <th>Nome Cliente</th>
+        <th>Telefone</th>
+        <th>Data de Entrada</th>
+        <th>Data de Saída</th>
+        <th>Valor da Diária</th>
+        <th>Observações</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>  
+    </tbody>
+  </table>
+  <button id="bt-voltar-detalhes" onclick="mostrarTelaCalendario()">Voltar ao Calendário</button>
+</div>
+
+<div id="tela-configuracoes" class="container" style="display: none;">
+  <h1>Configurações</h1>
+
+  <div class="config-section">
+    <h2>Conta</h2>
+    <button class="config-item">Alterar Nome</button>
+    <button class="config-item">Alterar Senha</button>
+    <button class="config-item">Sair</button>
+  </div>
+
+  <div class="config-section">
+    <h2>Preferências</h2>
+    <label class="toggle">
+      <span>Tema escuro</span>
+      <input type="checkbox" id="tema-escuro">
+    </label>
+    <label class="toggle">
+      <span>Notificações</span>
+      <input type="checkbox" id="notificacoes">
+    </label>
+  </div>
+
+  <div class="config-section">
+    <h2>Sistema</h2>
+    <p>Versão 1.0.0</p>
+    <button class="config-item">Ajuda e Suporte</button>
+  </div>
+
+  <button onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/usuarios.js"></script>
+  <script src="js/reservas.js"></script>
+  <script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    registrations.forEach((registration) => {
+      registration.unregister().then(() => {
+        console.log("Service Worker removido:", registration);
+      });
+    });
+  });
+}
+  </script>
+</body>
+
+</html>
