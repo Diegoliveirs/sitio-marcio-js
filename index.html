@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reservas </title>
-  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -124,7 +123,7 @@
   <button id="bt-voltar-detalhes" onclick="mostrarTelaCalendario()">Voltar ao Calendário</button>
 </div>
 
-<div id="tela-configuracoes" class="container" style="display: none;">
+<!-- <div id="tela-configuracoes" class="container" style="display: none;">
   <h1>Configurações</h1>
 
   <div class="config-section">
@@ -154,23 +153,63 @@
 
   <button onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
 </div>
+-->
+
+<div id="tela-configuracoes" class="container" style="display: none;">
+  <h1>Perfil do Usuário</h1>
+
+  <div id="perfil-header" class="config-section">
+    <div class="avatar-container">
+      <i id="user-avatar" class="fas fa-user-circle"></i>
+    </div>
+    <p id="perfil-nome" class="profile-name-display"></p>
+    <p id="perfil-usuario" class="profile-username-display"></p>
+  </div>
+  
+  <div class="config-section">
+    <h2>Preferências</h2>
+    <div class="config-list">
+      <label class="toggle config-list-item">
+        <span>Tema escuro</span>
+        <input type="checkbox" id="tema-escuro">
+      </label>
+      <label class="toggle config-list-item">
+        <span>Notificações</span>
+        <input type="checkbox" id="notificacoes">
+      </label>
+    </div>
+  </div>
+
+  <div class="config-section">
+    <h2>Sistema</h2>
+    <div class="config-list">
+        <div class="config-list-item">
+            <span>Versão</span>
+            <span class="version-info">1.0.0</span>
+        </div>
+        <div class="config-list-item" onclick="/* função para Ajuda e Suporte */">
+            <span>Ajuda e Suporte</span>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+    </div>
+  </div>
+
+<div class="config-section acoes-perfil">
+    <div class="config-list">
+      <div class="config-list-item" onclick="/* Adicione aqui a função de Alterar Senha */">
+        <span>Alterar Senha</span>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+    </div>
+    
+    <button id="bt-logout" class="botao-critico" onclick="logout()">Sair (Logout)</button>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/usuarios.js"></script>
   <script src="js/reservas.js"></script>
-  <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.getRegistrations().then((registrations) => {
-    registrations.forEach((registration) => {
-      registration.unregister().then(() => {
-        console.log("Service Worker removido:", registration);
-      });
-    });
-  });
-}
-  </script>
 </body>
 
 </html>
