@@ -29,6 +29,8 @@ async function login(event) {
 
             if (usuarios.senha === senhaHash) {
                 usuarioLogado = usuarios;
+
+                usuarioLogado.avatarIcon = getAvatarIcon(String(usuarios.id));
      
                 alert(`Bem-vindo, ${usuarios.nome}!`);                
                 
@@ -93,4 +95,38 @@ async function cadastrarUsuario(event) {
 
     mostrarTela("tela-login");
     }
+}
+
+function getAvatarIcon(seed) {
+    const icons = [
+        "fa-user-circle",
+        "fa-hat-wizard",
+        "fa-ghost",
+        "fa-paw",
+        "fa-leaf",
+        "fa-bolt",
+        "fa-rocket"
+    ];
+
+    let hash = 0;
+
+    if (seed && seed.length > 0) {
+        for (let i = 0; i < seed.length; i++) {
+            hash = (hash << 5) - hash + seed.charCodeAt(i);
+            hash |= 0; 
+        }
+
+        index = Math.abs(hash) % icons.length;
+    } else {
+        index = 0;
+    }
+
+    return "fas " + icons[index];
+}
+
+function logout() {
+    usuarioLogado = null;
+    document.getElementById("btn-cadastro-usuario").style.display = "none";
+    alert("Você saiu da conta.");
+    mostrarTela("tela-login");
 }

@@ -421,3 +421,55 @@ button:hover {
     z-index: 1100;
     height: var(--nav-h);
 }
+
+.avatar-container {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+
+#user-avatar {
+    font-size: 80px; 
+    color: #4CAF50; 
+    border-radius: 50%;
+    padding: 5px;
+    background-color: #f0f0f0;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-name-display {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0 5px 0;
+}
+
+.profile-username-display {
+    text-align: center;
+    font-size: 16px;
+    color: #888;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+}
+
+#bt-logout.botao-critico {
+    /* Herda o padding, border-radius e tamanho do botão padrão */
+    background-color: #d9534f; /* Vermelho para ação crítica */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+#bt-logout.botao-critico:hover {
+    background-color: #c9302c; /* Tonalidade mais escura no hover */
+}

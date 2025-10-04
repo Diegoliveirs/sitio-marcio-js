@@ -34,6 +34,28 @@ function mostrarTelaCalendario() {
 
 function mostrarTelaConfiguracoes() {
     mostrarTela("tela-configuracoes");
+
+    const perfilNome = document.getElementById("perfil-nome");
+    const perfilUsuario = document.getElementById("perfil-usuario");
+    const perfilAvatar = document.getElementById("user-avatar");
+
+    if (usuarioLogado) {
+        if (perfilNome && perfilUsuario && perfilAvatar) {
+            perfilNome.innerText = usuarioLogado.nome;
+            perfilUsuario.innerText = `@${usuarioLogado.usuario}`;
+
+            perfilAvatar.className = "";
+            perfilAvatar.classList.add(...usuarioLogado.avatarIcon.split(' '));
+        }
+        
+    } else {
+        if (perfilNome && perfilUsuario && perfilAvatar) {
+            perfilNome.innerText = "Não logado";
+            perfilUsuario.innerText = "";
+            perfilAvatar.classList.add("fa", "fa-user-slash");
+        }
+
+    }
 }
 
 
