@@ -23,7 +23,6 @@
   <button id="btn-cadastro-usuario" class="menu-button" onclick="mostrarTelaCadastroUsuario()" style="display: none;">Cadastrar Usuários</button>
   <button class="menu-button" onclick="mostrarTelaCadastroReserva()">Cadastrar Reservas</button>
   <button class="menu-button" onclick="mostrarTelaListarReservas()">Listar Reservas</button>
-  <button class="menu-button" onclick="mostrarTelaCalendario()">Voltar</button>
 </div>
 
 
@@ -85,7 +84,7 @@
 </div>
 
 <div id="tela-listar-reservas" class="container" style="display: none;">
-  <h1>Reservas Cadastradas</h1>
+  <h1>Reservas</h1>
   <table id="tabela-reservas">
     <thead>
       <tr>
@@ -120,40 +119,8 @@
     <tbody>  
     </tbody>
   </table>
-  <button id="bt-voltar-detalhes" onclick="mostrarTelaCalendario()">Voltar ao Calendário</button>
+  <button id="bt-voltar-detalhes" class="menu-button" onclick="mostrarTelaCalendario()">Voltar ao Calendário</button>
 </div>
-
-<!-- <div id="tela-configuracoes" class="container" style="display: none;">
-  <h1>Configurações</h1>
-
-  <div class="config-section">
-    <h2>Conta</h2>
-    <button class="config-item">Alterar Nome</button>
-    <button class="config-item">Alterar Senha</button>
-    <button class="config-item">Sair</button>
-  </div>
-
-  <div class="config-section">
-    <h2>Preferências</h2>
-    <label class="toggle">
-      <span>Tema escuro</span>
-      <input type="checkbox" id="tema-escuro">
-    </label>
-    <label class="toggle">
-      <span>Notificações</span>
-      <input type="checkbox" id="notificacoes">
-    </label>
-  </div>
-
-  <div class="config-section">
-    <h2>Sistema</h2>
-    <p>Versão 1.0.0</p>
-    <button class="config-item">Ajuda e Suporte</button>
-  </div>
-
-  <button onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
-</div>
--->
 
 <div id="tela-configuracoes" class="container" style="display: none;">
   <h1>Perfil do Usuário</h1>
@@ -165,41 +132,17 @@
     <p id="perfil-nome" class="profile-name-display"></p>
     <p id="perfil-usuario" class="profile-username-display"></p>
   </div>
-  
-  <div class="config-section">
-    <h2>Preferências</h2>
-    <div class="config-list">
-      <label class="toggle config-list-item">
-        <span>Tema escuro</span>
-        <input type="checkbox" id="tema-escuro">
-      </label>
-      <label class="toggle config-list-item">
-        <span>Notificações</span>
-        <input type="checkbox" id="notificacoes">
-      </label>
-    </div>
-  </div>
 
   <div class="config-section">
-    <h2>Sistema</h2>
     <div class="config-list">
-        <div class="config-list-item">
-            <span>Versão</span>
-            <span class="version-info">1.0.0</span>
-        </div>
-        <div class="config-list-item" onclick="/* função para Ajuda e Suporte */">
-            <span>Ajuda e Suporte</span>
-            <i class="fas fa-chevron-right"></i>
+        <div class="config-list-item version-center" >
+            <span>1.0.0</span>
         </div>
     </div>
   </div>
 
 <div class="config-section acoes-perfil">
     <div class="config-list">
-      <div class="config-list-item" onclick="/* Adicione aqui a função de Alterar Senha */">
-        <span>Alterar Senha</span>
-        <i class="fas fa-chevron-right"></i>
-      </div>
     </div>
     
     <button id="bt-logout" class="botao-critico" onclick="logout()">Sair (Logout)</button>

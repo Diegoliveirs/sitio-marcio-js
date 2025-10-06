@@ -392,4 +392,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         renderizarCalendario(mesAtual, anoAtual);
     }
+
+    if (typeof iniciarTemaAutomatico === 'function') {
+        iniciarTemaAutomatico();
+    }
 });
