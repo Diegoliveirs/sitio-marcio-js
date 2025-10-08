@@ -112,6 +112,26 @@ async function renderizarCalendario(mes, ano) {
 
 }
 
+function aplicarTemaEscuro(isDark) {
+    const body = document.body;
+
+    if (isDark) {
+        body.classList.add("dark-mode");
+    } else {
+        body.classList.remove("dark-mode");
+    }
+}
+
+function iniciarTemaAutomatico() {
+    const sistemaPrefereEscuro = window.matchMedia('(prefers-color-scheme: dark)');
+    aplicarTemaEscuro(sistemaPrefereEscuro.matches);
+
+    sistemaPrefereEscuro.addEventListener('change', (e) => {
+        aplicarTemaEscuro(e.matches);
+    });
+}
+
+
 let dataAtual = new Date();
 let mesAtual = dataAtual.getMonth();
 let anoAtual = dataAtual.getFullYear();
