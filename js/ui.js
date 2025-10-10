@@ -2,6 +2,17 @@ function mostrarTela(idTela) {
     const telas = ["tela-login", "tela-menu", "tela-cadastro-reserva", "tela-cadastro-usuarios", "tela-listar-reservas", "tela-calendario", "tela-detalhes-reserva", "tela-configuracoes"];
     const rodape = document.getElementById("rodape");
 
+    const telaParaIcone = {
+        "tela-menu": "icone-menu",
+        "tela-calendario": "icone-calendario",
+        "tela-configuracoes": "icone-configuracoes",
+
+        "tela-cadastro-reserva": "icone-calendario",
+        "tela-listar-reservas": "icone-calendario",
+        "tela-detalhes-reserva": "icone-calendario",
+        "tela-cadastro-usuarios": "icone-menu"
+    };
+
     telas.forEach(tela => {
         const el = document.getElementById(tela);
         if (el) el.style.display = 'none';
@@ -13,6 +24,19 @@ function mostrarTela(idTela) {
         rodape.style.display = 'none';
     } else if (rodape) {
         rodape.style.display = 'flex';
+    }
+
+    const icones = document.querySelectorAll("#rodape .rodape-icone");
+    icones.forEach(icone => {
+        icone.classList.remove("ativo-icone");
+    });
+
+    const iconeAtivoId = telaParaIcone[idTela];
+    if (iconeAtivoId) {
+        const iconeAtivo = document.getElementById(iconeAtivoId);
+        if (iconeAtivo) {
+            iconeAtivo.classList.add("ativo-icone");
+        }
     }
 }
 

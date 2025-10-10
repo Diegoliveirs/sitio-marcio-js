@@ -47,6 +47,12 @@ async function cadastrarReserva(event) {
         return;
     }
 
+    if (!usuarioLogado && usuarioLogado.nome) {
+        alert("Você precisa estar logado para cadastrar uma reserva.");
+        return;
+    }
+
+
     try {
         const { data: novaReserva, error } = await supabase
             .from('reservas')
@@ -57,7 +63,8 @@ async function cadastrarReserva(event) {
                 data_entrada: dataEntrada,
                 data_saida: dataSaida,
                 diaria: diaria,
-                observacao: observacao
+                observacao: observacao,
+                criado_por: usuarioLogado.nome
             }
         ]);
     
@@ -80,19 +87,35 @@ async function cadastrarReserva(event) {
 
 async function mostrarTelaListarReservas() {
     try {
+        const ultimoDia = new Date(anoAtual, mesAtual + 1, 0).getDate();
+        const mesFormatado = String(mesAtual + 1).padStart(2, '0');
+
+        const dataInicioMes = `${anoAtual}-${mesFormatado}-01`;
+        const dataFimMes = `${anoAtual}-${mesFormatado}-${String(ultimoDia).padStart(2, '0')}`;
+        
         const { data: reservas, error } = await supabase
             .from('reservas')
-            .select('*'); 
+            .select('*')
+            .lte('data_entrada', dataFimMes)
+            .gte('data_saida', dataInicioMes)
 
             if (error) {
-                alert("Erro ao buscar reservas: " + error.message);
+                alert("Erro ao carregar reservas: " + error.message);
                 console.error(error);
                 return;
-            }
+    }
 
-            const tabelaBody = document.querySelector("#tabela-reservas tbody");
-            console.log("Tabela Body:", tabelaBody);
-            tabelaBody.innerHTML = '';
+    const tabela = document.getElementById("tabela-reservas");
+    const mensagemVazia = document.getElementById("mensagem-sem-reservas");
+    const tabelaBody = document.querySelector("#tabela-reservas tbody");
+
+    if (reservas.length === 0) {
+        tabela.style.display = "none";
+        if (mensagemVazia) mensagemVazia.style.display = "block";
+    } else {
+        if (mensagemVazia) mensagemVazia.style.display = "none";
+        tabela.style.display = "table";
+    
             reservas.forEach(reserva => {
                 const row = tabelaBody.insertRow();
 
@@ -130,7 +153,7 @@ async function mostrarTelaListarReservas() {
                 cellAcoes.innerHTML = `<button onclick="editarReserva('${reserva.id}')" class="btn-acao btn-editar">Editar</button>
                                        <button onclick="deletarReserva('${reserva.id}')" class="btn-acao btn-deletar">Deletar</button>`;
             });
-
+        }
             mostrarTela("tela-listar-reservas");
         } catch (err) {
             alert("Ocorreu um erro ao carregar reservas!");

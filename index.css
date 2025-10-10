@@ -409,7 +409,7 @@ button:hover {
 }
 
 .rodape-icone.ativo-icone {
-    color: #007bff;
+    color: #007bff !important;
 }
 
 /* Navbar fixa (ajuste o seletor conforme seu HTML) */
@@ -590,9 +590,40 @@ body.dark-mode .rodape-icone {
     color: #a0a0a0;
 }
 body.dark-mode .rodape-icone.ativo-icone {
-    color: #66BB6A;
+    color: #66BB6A !important;
 }
 
 body.dark-mode .calendario-dias .reservado {
-    background-color: #d32f2f; /* Vermelho escuro para reservas */
+    background-color: #d32f2f; 
+}
+
+#mensagem-sem-reservas {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border: 1px dashed #ccc; 
+    border-radius: 8px;
+    color: #888;
+}
+
+#mensagem-sem-reservas .fas {
+    color: #4CAF50; 
+    margin-bottom: 15px;
+}
+
+#mensagem-sem-reservas .titulo-vazio {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    margin-top: 0;
+}
+
+body.dark-mode #mensagem-sem-reservas {
+    background-color: #1e1e1e; 
+    border-color: #363636;
+    color: #a0a0a0;
+}
+body.dark-mode #mensagem-sem-reservas .titulo-vazio {
+    color: #e4e6eb; 
 }

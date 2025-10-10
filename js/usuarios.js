@@ -129,4 +129,5 @@ function logout() {
     document.getElementById("btn-cadastro-usuario").style.display = "none";
     alert("Você saiu da conta.");
     mostrarTela("tela-login");
+    document.getElementById("form-login").reset();
 }
