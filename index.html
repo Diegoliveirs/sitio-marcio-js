@@ -6,6 +6,7 @@
   <title>Reservas </title>
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;,">
 </head>
 <body>
   
@@ -47,13 +48,13 @@
 </div>
 
     <div class="calendario-rodape" id="rodape">
-      <button class="rodape-icone" onclick="voltarAoMenu()">
+      <button id="icone-menu" class="rodape-icone" onclick="voltarAoMenu()">
         <i class="fa fa-jelly fa-regular fa-bars"></i>
       </button>
-      <button class="rodape-icone ativo-icone" onclick="mostrarTelaCalendario()">
+      <button id="icone-calendario" class="rodape-icone ativo-icone" onclick="mostrarTelaCalendario()">
         <i class="fa fa-jelly fa-regular fa-calendar"></i>
       </button>
-      <button class="rodape-icone" onclick="mostrarTelaConfiguracoes()">
+      <button id="icone-configuracoes" class="rodape-icone" onclick="mostrarTelaConfiguracoes()">
         <i class="fa fa-jelly fa-regular fa-cog"></i>
       </button>
     </div>
@@ -85,21 +86,26 @@
 
 <div id="tela-listar-reservas" class="container" style="display: none;">
   <h1>Reservas</h1>
-  <table id="tabela-reservas">
-    <thead>
-      <tr>
-        <th>Nome Cliente</th>
-        <th>Telefone</th>
-        <th>Data de Entrada</th>
-        <th>Data de Saída</th>
-        <th>Valor da Diária</th>
-        <th>Observações</th>
-      </tr>
-    </thead>
-    <tbody>  
-        </tbody>
-  </table>
-  <button id="bt-voltar-menu-listar" onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
+  <div id="mensagem-sem-reservas" style="display: none;">
+    <i class="fas fa-calendar-check fa-3x"></i>
+    <p class="titulo-vazio">Nenhuma reserva encontrada.</p>
+    <p>Por favor, adicione uma nova reserva.</p>
+  </div>
+    <table id="tabela-reservas">
+      <thead>
+        <tr>
+          <th>Nome Cliente</th>
+          <th>Telefone</th>
+          <th>Data de Entrada</th>
+          <th>Data de Saída</th>
+          <th>Valor da Diária</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>  
+      </tbody>
+    </table>
+    <button id="bt-voltar-menu-listar" onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
 </div>
 
 <div id="tela-detalhes-reserva" class="container" style="display: none;">
@@ -123,7 +129,7 @@
 </div>
 
 <div id="tela-configuracoes" class="container" style="display: none;">
-  <h1>Perfil do Usuário</h1>
+  <h1>Perfil</h1>
 
   <div id="perfil-header" class="config-section">
     <div class="avatar-container">
