@@ -1,96 +1,121 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reservas </title>
+  <title>Reservas</title>
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="icon" type="image/x-icon" href="data:image/x-icon;,">
 </head>
+
 <body>
-  
-<div id="tela-login" class="container">
-  <h1>Login</h1>
-  <form id="form-login">
-    <input type="text" id="usuario-login" placeholder="Usuário" required/>
-    <input type="password" id="senha-login" placeholder="Senha" required/>
-    <button type="submit">Entrar</button>
-  </form>
-</div>
 
- <div id="tela-menu" class="container" style="display: none;">
-  <h1>Menu</h1>
-  <button id="btn-cadastro-usuario" class="menu-button" onclick="mostrarTelaCadastroUsuario()" style="display: none;">Cadastrar Usuários</button>
-  <button class="menu-button" onclick="mostrarTelaCadastroReserva()">Cadastrar Reservas</button>
-  <button class="menu-button" onclick="mostrarTelaListarReservas()">Listar Reservas</button>
-</div>
-
-
-<div id="tela-calendario" class="container" style="display: none;">
-  <div class="calendario">
-    <div class="calendario-header">
-      <button id="mes-anterior">&lt;</button>
-      <h2 id="mes-atual"></h2>
-      <button id="proximo-mes">&gt;</button>
-    </div>
-    <div class="dias-semana">
-      <span>Dom</span>
-      <span>Seg</span>
-      <span>Ter</span>
-      <span>Qua</span>
-      <span>Qui</span>
-      <span>Sex</span>
-      <span>Sab</span>
-    </div>
-    <div class="calendario-dias" id="calendario-dias"></div>
+  <div id="tela-login" class="container">
+    <h1>Login</h1>
+    <form id="form-login">
+      <input type="text" id="usuario-login" placeholder="Usuário" required />
+      <input type="password" id="senha-login" placeholder="Senha" required />
+      <button type="submit">Entrar</button>
+    </form>
   </div>
-</div>
 
-    <div class="calendario-rodape" id="rodape">
-      <button id="icone-menu" class="rodape-icone" onclick="voltarAoMenu()">
-        <i class="fa fa-jelly fa-regular fa-bars"></i>
-      </button>
-      <button id="icone-calendario" class="rodape-icone ativo-icone" onclick="mostrarTelaCalendario()">
-        <i class="fa fa-jelly fa-regular fa-calendar"></i>
-      </button>
-      <button id="icone-configuracoes" class="rodape-icone" onclick="mostrarTelaConfiguracoes()">
-        <i class="fa fa-jelly fa-regular fa-cog"></i>
-      </button>
-    </div>
-
-<div id="tela-cadastro-reserva" class="container" style="display: none;">
-  <form id="form-reserva">
-  <h1>Cadastrar Reserva</h1>
-    <input type="text" id="nomecliente" placeholder="Nome do Cliente"/>
-    <input type="number" id="telefone" placeholder="Telefone"/>
-    <input type="date" id="data-entrada" placeholder="Data de Entrada"/>
-    <input type="date" id="data-saida" placeholder="Data de Saída"/>
-    <input type="number" id="diaria" placeholder="Valor da Diária"/>
-    <input type="text" id="observacao" placeholder="Observações"/>
-    <button type="submit">Cadastrar</button>
-  </form>
-  <button id="bt-voltar-cadastro-reserva" onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
-</div>
-
-<div id="tela-cadastro-usuarios" class="container" style="display: none;">
-  <form id="form-usuario">
-    <h1>Cadastrar Usuário</h1>
-    <input type="text" id="nomeusuario" placeholder="Nome"/>
-    <input type="text" id="usuario-cadastro" placeholder="Usuário"/>
-    <input type="password" id="senha-cadastro" placeholder="Senha"/>
-    <button type="submit">Cadastrar</button>
-  </form>
-  <button onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
-</div>
-
-<div id="tela-listar-reservas" class="container" style="display: none;">
-  <h1>Reservas</h1>
-  <div id="mensagem-sem-reservas" style="display: none;">
-    <i class="fas fa-calendar-check fa-3x"></i>
-    <p class="titulo-vazio">Nenhuma reserva encontrada.</p>
-    <p>Por favor, adicione uma nova reserva.</p>
+  <div id="tela-menu" class="container" style="display: none;">
+    <h1>Menu</h1>
+    <button id="btn-cadastro-usuario" class="menu-button" onclick="mostrarTelaCadastroUsuario()"
+      style="display: none;">Cadastrar Usuários</button>
+    <button class="menu-button" onclick="mostrarTelaCadastroReserva()">Cadastrar Reservas</button>
+    <button class="menu-button" onclick="mostrarTelaListarReservas()">Listar Reservas</button>
   </div>
+
+
+  <div id="tela-calendario" class="container" style="display: none;">
+    <div class="calendario">
+      <div class="calendario-header">
+        <button id="mes-anterior">&lt;</button>
+        <h2 id="mes-atual"></h2>
+        <button id="proximo-mes">&gt;</button>
+      </div>
+      <div class="dias-semana">
+        <span>Dom</span>
+        <span>Seg</span>
+        <span>Ter</span>
+        <span>Qua</span>
+        <span>Qui</span>
+        <span>Sex</span>
+        <span>Sab</span>
+      </div>
+      <div class="calendario-dias" id="calendario-dias"></div>
+
+      <div class="legenda-interna">
+        <div class="legenda-item">
+          <span class="legenda-dot disponivel"></span>
+          <span class="legenda-texto">Disponível</span>
+        </div>
+        <div class="legenda-item">
+          <span class="legenda-dot ocupado"></span>
+          <span class="legenda-texto">Reservado</span>
+        </div>
+        <div class="legenda-item">
+          <span class="legenda-dot hoje"></span>
+          <span class="legenda-texto">Hoje</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="calendario-rodape" id="rodape">
+    <button id="icone-menu" class="rodape-icone" onclick="voltarAoMenu()">
+      <i class="fa fa-jelly fa-regular fa-bars"></i>
+    </button>
+    <button id="icone-calendario" class="rodape-icone ativo-icone" onclick="mostrarTelaCalendario()">
+      <i class="fa fa-jelly fa-regular fa-calendar"></i>
+    </button>
+    <button id="icone-configuracoes" class="rodape-icone" onclick="mostrarTelaConfiguracoes()">
+      <i class="fa fa-jelly fa-regular fa-cog"></i>
+    </button>
+  </div>
+
+  <div id="legenda-publica" class="rodape-publico" style="display: none;">
+    <button class="btn-whatsapp" onclick="abrirWhatsApp()">
+      <i class="fab fa-whatsapp"></i> Reservar pelo WhatsApp
+    </button>
+  </div>
+
+  <div id="tela-cadastro-reserva" class="container" style="display: none;">
+    <form id="form-reserva">
+      <h1>Cadastrar Reserva</h1>
+      <input type="text" id="nomecliente" placeholder="Nome do Cliente" />
+      <input type="number" id="telefone" placeholder="Telefone" />
+      <input type="date" id="data-entrada" placeholder="Data de Entrada" />
+      <input type="date" id="data-saida" placeholder="Data de Saída" />
+      <input type="number" id="diaria" placeholder="Valor da Diária" />
+      <input type="text" id="observacao" placeholder="Observações" />
+      <button type="submit">Cadastrar</button>
+    </form>
+    <button id="bt-voltar-cadastro-reserva" onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
+  </div>
+
+  <div id="tela-cadastro-usuarios" class="container" style="display: none;">
+    <form id="form-usuario">
+      <h1>Cadastrar Usuário</h1>
+      <input type="text" id="nomeusuario" placeholder="Nome" />
+      <input type="text" id="usuario-cadastro" placeholder="Usuário" />
+      <input type="password" id="senha-cadastro" placeholder="Senha" />
+      <button type="submit">Cadastrar</button>
+    </form>
+    <button onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
+  </div>
+
+  <div id="tela-listar-reservas" class="container" style="display: none;">
+    <h1>Reservas</h1>
+    <div id="mensagem-sem-reservas" style="display: none;">
+      <i class="fas fa-calendar-check fa-3x"></i>
+      <p class="titulo-vazio">Nenhuma reserva encontrada.</p>
+      <p>Por favor, adicione uma nova reserva.</p>
+    </div>
     <table id="tabela-reservas">
       <thead>
         <tr>
@@ -102,57 +127,58 @@
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody>  
+      <tbody>
       </tbody>
     </table>
     <button id="bt-voltar-menu-listar" onclick="voltarAoMenu()">Voltar ao Menu Principal</button>
-</div>
-
-<div id="tela-detalhes-reserva" class="container" style="display: none;">
-  <h1>Detalhes da Reserva</h1>
-  <table id="tabela-detalhes-reserva">
-    <thead>
-      <tr>
-        <th>Nome Cliente</th>
-        <th>Telefone</th>
-        <th>Data de Entrada</th>
-        <th>Data de Saída</th>
-        <th>Valor da Diária</th>
-        <th>Observações</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>  
-    </tbody>
-  </table>
-  <button id="bt-voltar-detalhes" class="menu-button" onclick="mostrarTelaCalendario()">Voltar ao Calendário</button>
-</div>
-
-<div id="tela-configuracoes" class="container" style="display: none;">
-  <h1>Perfil</h1>
-
-  <div id="perfil-header" class="config-section">
-    <div class="avatar-container">
-      <i id="user-avatar" class="fas fa-user-circle"></i>
-    </div>
-    <p id="perfil-nome" class="profile-name-display"></p>
-    <p id="perfil-usuario" class="profile-username-display"></p>
   </div>
 
-  <div class="config-section">
-    <div class="config-list">
-        <div class="config-list-item version-center" >
-            <span>1.0.0</span>
+  <div id="tela-detalhes-reserva" class="container" style="display: none;">
+    <h1>Detalhes da Reserva</h1>
+    <table id="tabela-detalhes-reserva">
+      <thead>
+        <tr>
+          <th>Nome Cliente</th>
+          <th>Telefone</th>
+          <th>Data de Entrada</th>
+          <th>Data de Saída</th>
+          <th>Valor da Diária</th>
+          <th>Observações</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <button id="bt-voltar-detalhes" class="menu-button" onclick="mostrarTelaCalendario()">Voltar ao Calendário</button>
+  </div>
+
+  <div id="tela-configuracoes" class="container" style="display: none;">
+    <h1>Perfil</h1>
+
+    <div id="perfil-header" class="config-section">
+      <div class="avatar-container">
+        <i id="user-avatar" class="fas fa-user-circle"></i>
+      </div>
+      <p id="perfil-nome" class="profile-name-display"></p>
+      <p id="perfil-usuario" class="profile-username-display"></p>
+    </div>
+
+    <div class="config-section">
+      <div class="config-list">
+        <div class="config-list-item version-center">
+          <span>1.0.0</span>
         </div>
+      </div>
+    </div>
+
+    <div class="config-section acoes-perfil">
+      <div class="config-list">
+      </div>
+
+      <button id="bt-logout" class="botao-critico" onclick="logout()">Sair (Logout)</button>
     </div>
   </div>
-
-<div class="config-section acoes-perfil">
-    <div class="config-list">
-    </div>
-    
-    <button id="bt-logout" class="botao-critico" onclick="logout()">Sair (Logout)</button>
-</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase.js"></script>

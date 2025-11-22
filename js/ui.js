@@ -1,3 +1,38 @@
+const DOMINIO_ADMIN = "sitiomarcio.app";
+let MODO_PUBLICO = false;
+
+function verificarAcessoPorDominio() {
+    const hostAtual = window.location.hostname;
+    if (hostAtual !== DOMINIO_ADMIN) {
+        MODO_PUBLICO = true
+        aplicarModoPublico();
+    } else {
+        mostrarTela("tela-login");
+    }
+}
+
+function aplicarModoPublico() {
+    mostrarTela("tela-calendario");
+
+    const rodapeAdmin = document.getElementById("rodape");
+    if (rodapeAdmin) {
+        rodapeAdmin.style.display = 'none';
+    }
+
+    const rodapePublico = document.getElementById("legenda-publica");
+    if (rodapePublico) {
+        rodapePublico.style.display = 'flex';
+    }
+}
+
+function abrirWhatsApp() {
+    const numeroTelefone = "5585981808296";
+    const mensagem = "Olá, gostaria de mais informações sobre as datas disponíveis.";
+
+    const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroTelefone}&text=${encodeURIComponent(mensagem)}`;
+    window.open(urlWhatsApp, "_blank");
+}
+
 function mostrarTela(idTela) {
     const telas = ["tela-login", "tela-menu", "tela-cadastro-reserva", "tela-cadastro-usuarios", "tela-listar-reservas", "tela-calendario", "tela-detalhes-reserva", "tela-configuracoes"];
     const rodape = document.getElementById("rodape");
@@ -71,7 +106,7 @@ function mostrarTelaConfiguracoes() {
             perfilAvatar.className = "";
             perfilAvatar.classList.add(...usuarioLogado.avatarIcon.split(' '));
         }
-        
+
     } else {
         if (perfilNome && perfilUsuario && perfilAvatar) {
             perfilNome.innerText = "Não logado";
@@ -104,19 +139,19 @@ async function renderizarCalendario(mes, ano) {
         diasContainer.appendChild(diaLivre);
     }
 
-    for(let dia = 1; dia <= diasNoMes; dia++) {
+    for (let dia = 1; dia <= diasNoMes; dia++) {
         const diaElemento = document.createElement('span');
         diaElemento.classList.add('dia');
         diaElemento.innerText = dia;
         diasContainer.appendChild(diaElemento);
-          
-       const hoje = new Date();
-       if(dia === hoje.getDate() && mes === hoje.getMonth() && ano === hoje.getFullYear()) {
-           diaElemento.classList.add('hoje');
-       }
 
-       const dataDia = `${ano}-${String(mes + 1).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
-       reservas.forEach(reserva => {
+        const hoje = new Date();
+        if (dia === hoje.getDate() && mes === hoje.getMonth() && ano === hoje.getFullYear()) {
+            diaElemento.classList.add('hoje');
+        }
+
+        const dataDia = `${ano}-${String(mes + 1).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
+        reservas.forEach(reserva => {
             const dataEntrada = new Date(reserva.data_entrada + 'T00:00:00');
             const dataSaida = new Date(reserva.data_saida + 'T00:00:00');
             const dataAtual = new Date(dataDia + 'T00:00:00');
@@ -124,14 +159,23 @@ async function renderizarCalendario(mes, ano) {
             if (dataAtual >= dataEntrada && dataAtual <= dataSaida) {
                 diaElemento.classList.add('reservado');
             }
-       });
+        });
 
-       diaElemento.addEventListener('click', () => {
-        const mesFormatado = String(mes + 1).padStart(2, '0');
-        const diaFormatado = String(dia).padStart(2, '0');
-        const dataSelecionada = `${ano}-${mesFormatado}-${diaFormatado}`;
-        checarReserva(dataSelecionada);
-       });
+        const ehPublico = (typeof MODO_PUBLICO !== 'undefined' && MODO_PUBLICO === true);
+
+        if (!ehPublico) {
+            diaElemento.style.cursor = 'pointer';
+
+            diaElemento.addEventListener('click', () => {
+                const mesFormatado = String(mes + 1).padStart(2, '0');
+                const diaFormatado = String(dia).padStart(2, '0');
+                const dataSelecionada = `${ano}-${mesFormatado}-${diaFormatado}`;
+                checarReserva(dataSelecionada);
+            });
+        } else {
+            diaElemento.style.cursor = 'default';
+            diaElemento.classList.add('dia-publico');
+        }
     }
 
 }
