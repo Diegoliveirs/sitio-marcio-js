@@ -9,13 +9,13 @@ async function verificarConflitosReservas(dataEntrada, dataSaida, idReservaAtual
     if (idReservaAtual) {
         query = query.not('id', 'eq', idReservaAtual);
     }
-    
+
     const { data: reservas, error } = await query;
     if (error) {
         console.error("Erro ao verificar conflitos de reservas: ", error);
         return false;
     }
-    
+
     return reservas.length > 0;
 }
 
@@ -58,16 +58,16 @@ async function cadastrarReserva(event) {
             .from('reservas')
             .insert([
                 {
-                nome_cliente: nomecliente,
-                telefone: telefone,
-                data_entrada: dataEntrada,
-                data_saida: dataSaida,
-                diaria: diaria,
-                observacao: observacao,
-                criado_por: usuarioLogado.nome
-            }
-        ]);
-    
+                    nome_cliente: nomecliente,
+                    telefone: telefone,
+                    data_entrada: dataEntrada,
+                    data_saida: dataSaida,
+                    diaria: diaria,
+                    observacao: observacao,
+                    criado_por: usuarioLogado.nome
+                }
+            ]);
+
         if (error) {
             alert("Erro ao cadastrar reserva: " + error.message);
             console.error(error);
@@ -81,7 +81,7 @@ async function cadastrarReserva(event) {
         alert("Ocorreu um erro ao cadastrar reserva!");
         console.error(err);
     }
-    
+
 }
 
 
@@ -92,39 +92,39 @@ async function mostrarTelaListarReservas() {
 
         const dataInicioMes = `${anoAtual}-${mesFormatado}-01`;
         const dataFimMes = `${anoAtual}-${mesFormatado}-${String(ultimoDia).padStart(2, '0')}`;
-        
+
         const { data: reservas, error } = await supabase
             .from('reservas')
             .select('*')
             .lte('data_entrada', dataFimMes)
             .gte('data_saida', dataInicioMes)
 
-            if (error) {
-                alert("Erro ao carregar reservas: " + error.message);
-                console.error(error);
-                return;
-    }
+        if (error) {
+            alert("Erro ao carregar reservas: " + error.message);
+            console.error(error);
+            return;
+        }
 
-    const tabela = document.getElementById("tabela-reservas");
-    const mensagemVazia = document.getElementById("mensagem-sem-reservas");
-    const tabelaBody = document.querySelector("#tabela-reservas tbody");
+        const tabela = document.getElementById("tabela-reservas");
+        const mensagemVazia = document.getElementById("mensagem-sem-reservas");
+        const tabelaBody = document.querySelector("#tabela-reservas tbody");
 
-    if (reservas.length === 0) {
-        tabela.style.display = "none";
-        if (mensagemVazia) mensagemVazia.style.display = "block";
-    } else {
-        if (mensagemVazia) mensagemVazia.style.display = "none";
-        tabela.style.display = "table";
-    
+        if (reservas.length === 0) {
+            tabela.style.display = "none";
+            if (mensagemVazia) mensagemVazia.style.display = "block";
+        } else {
+            if (mensagemVazia) mensagemVazia.style.display = "none";
+            tabela.style.display = "table";
+
             reservas.forEach(reserva => {
                 const row = tabelaBody.insertRow();
 
                 const [anoEntrada, mesEntrada, diaEntrada] = reserva.data_entrada.split('-');
                 const dataEntradaFormatada = `${diaEntrada}/${mesEntrada}/${anoEntrada}`;
-                
+
                 const [anoSaida, mesSaida, diaSaida] = reserva.data_saida.split('-');
                 const dataSaidaFormatada = `${diaSaida}/${mesSaida}/${anoSaida}`;
-                
+
                 const cell0 = row.insertCell(0);
                 cell0.innerText = reserva.nome_cliente;
                 cell0.setAttribute('data-label', 'Nome do Cliente');
@@ -154,11 +154,11 @@ async function mostrarTelaListarReservas() {
                                        <button onclick="deletarReserva('${reserva.id}')" class="btn-acao btn-deletar">Deletar</button>`;
             });
         }
-            mostrarTela("tela-listar-reservas");
-        } catch (err) {
-            alert("Ocorreu um erro ao carregar reservas!");
-            console.error(err);
-        }
+        mostrarTela("tela-listar-reservas");
+    } catch (err) {
+        alert("Ocorreu um erro ao carregar reservas!");
+        console.error(err);
+    }
 }
 
 async function deletarReserva(id) {
@@ -179,8 +179,8 @@ async function deletarReserva(id) {
             }
 
         } catch (err) {
-                alert("Ocorreu um erro ao deletar a reserva!");
-                console.error(err);
+            alert("Ocorreu um erro ao deletar a reserva!");
+            console.error(err);
         }
     }
 }
@@ -196,29 +196,29 @@ function mostrarTelaCadastroReserva(isEditing = false) {
         backButton.onclick = () => voltarAoMenu();
     }
 
-} 
+}
 
 async function editarReserva(id) {
-    
+
     const { data: reserva, error } = await supabase
         .from('reservas')
         .select('*')
         .eq('id', id)
-        .single();  
-    
+        .single();
+
     if (error) {
         alert("Erro ao buscar reserva: " + error.message);
         console.error(error);
         return;
     }
-    
+
     document.getElementById("nomecliente").value = reserva.nome_cliente;
     document.getElementById("telefone").value = reserva.telefone;
     document.getElementById("data-entrada").value = reserva.data_entrada;
     document.getElementById("data-saida").value = reserva.data_saida;
     document.getElementById("diaria").value = reserva.diaria;
     document.getElementById("observacao").value = reserva.observacao;
-    
+
     reservaEmEdicao = reserva.id;
 
     document.querySelector("#form-reserva button[type='submit']").innerText = "Salvar Alterações";
@@ -263,17 +263,17 @@ async function atualizarReserva(event) {
             })
             .eq('id', reservaEmEdicao);
 
-            if (error) {
-                alert("Erro ao atualizar reserva: " + error.message);
-                console.error(error);
-            } else {
-                alert(`Reserva para ${nomecliente} atualizada com sucesso!`);
-                document.getElementById("form-reserva").reset();
-                reservaEmEdicao = null;
-                document.querySelector("#form-reserva button[type='submit']").innerText = "Cadastrar Reserva";
-                renderizarCalendario(mesAtual, anoAtual);
-                mostrarTelaCalendario();
-            }
+        if (error) {
+            alert("Erro ao atualizar reserva: " + error.message);
+            console.error(error);
+        } else {
+            alert(`Reserva para ${nomecliente} atualizada com sucesso!`);
+            document.getElementById("form-reserva").reset();
+            reservaEmEdicao = null;
+            document.querySelector("#form-reserva button[type='submit']").innerText = "Cadastrar Reserva";
+            renderizarCalendario(mesAtual, anoAtual);
+            mostrarTelaCalendario();
+        }
     } catch (err) {
         alert("Ocorreu um erro ao atualizar a reserva!");
         console.error(err);
@@ -288,27 +288,27 @@ async function checarReserva(data) {
             .lte('data_entrada', data)
             .gte('data_saida', data);
 
-            if(error) {
-                alert("Erro ao checar reservas: " + error.message);
-                console.error(error);
-                return;
-            }
-            
-            if(reservas && reservas.length > 0) {
-                const reserva = reservas[0];
-                mostrarDetalheReserva(reserva);
-            }else {
-                mostrarTelaCadastroReserva();
-                const formReserva = document.getElementById("form-reserva");
+        if (error) {
+            alert("Erro ao checar reservas: " + error.message);
+            console.error(error);
+            return;
+        }
 
-                if (formReserva) {
-                    formReserva.reset();
+        if (reservas && reservas.length > 0) {
+            const reserva = reservas[0];
+            mostrarDetalheReserva(reserva);
+        } else {
+            mostrarTelaCadastroReserva();
+            const formReserva = document.getElementById("form-reserva");
 
-                    const submitButton = formReserva.querySelector("button[type='submit']");
-                    
-                    if (submitButton) {
-                        submitButton.innerText = "Cadastrar Reserva";
-                    }
+            if (formReserva) {
+                formReserva.reset();
+
+                const submitButton = formReserva.querySelector("button[type='submit']");
+
+                if (submitButton) {
+                    submitButton.innerText = "Cadastrar Reserva";
+                }
             }
 
             reservaEmEdicao = null;
@@ -363,11 +363,11 @@ async function mostrarDetalheReserva(reserva) {
     cellAcoes.innerHTML = `<button onclick="editarReserva('${reserva.id}')" class="btn-acao btn-editar">Editar</button>
                            <button onclick="deletarReserva('${reserva.id}')" class="btn-acao btn-deletar">Deletar</button>`;
 
-    mostrarTela("tela-detalhes-reserva"); 
+    mostrarTela("tela-detalhes-reserva");
 }
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const formLogin = document.getElementById("form-login");
     if (formLogin) {
         formLogin.addEventListener("submit", login);
@@ -388,13 +388,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-    mostrarTela("tela-login");
+        if (typeof verificarAcessoPorDominio === 'function') {
+            verificarAcessoPorDominio();
+        } else {
+            mostrarTela("tela-login");
+        }
     }
 
     const mesAnteriorBtn = document.getElementById('mes-anterior');
     const proximoMesBtn = document.getElementById('proximo-mes');
 
-    if(mesAnteriorBtn && proximoMesBtn) {
+    if (mesAnteriorBtn && proximoMesBtn) {
         mesAnteriorBtn.addEventListener('click', () => {
             mesAtual--;
             if (mesAtual < 0) {

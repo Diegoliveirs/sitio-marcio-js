@@ -457,8 +457,7 @@ button:hover {
 }
 
 #bt-logout.botao-critico {
-    /* Herda o padding, border-radius e tamanho do botão padrão */
-    background-color: #d9534f; /* Vermelho para ação crítica */
+    background-color: #d9534f; 
     color: white;
     border: none;
     padding: 12px;
@@ -471,7 +470,7 @@ button:hover {
 }
 
 #bt-logout.botao-critico:hover {
-    background-color: #c9302c; /* Tonalidade mais escura no hover */
+    background-color: #c9302c; 
 }
 
 #tela-listar-reservas #bt-voltar-menu-listar,
@@ -491,13 +490,9 @@ button:hover {
     gap: 10px;
 }
 
-/* Arquivo: index.css */
-
-/* --- TEMA ESCURO REFINADO (TERROR RESOLVIDO - FOCO NA SOFISTICAÇÃO) --- */
-
 body.dark-mode {
-    background-color: #18191a; /* Fundo suave, não preto puro */
-    color: #e4e6eb; /* Texto principal em cinza muito claro */
+    background-color: #18191a; 
+    color: #e4e6eb; 
 }
 
 body.dark-mode h1,
@@ -505,13 +500,12 @@ body.dark-mode h2 {
     color: #e4e6eb;
 }
 
-/* 1. CONTAINERS, FORMS e CALENDÁRIO (Usando profundidade) */
 body.dark-mode #tela-cadastro-reserva,
 body.dark-mode .config-list,
 body.dark-mode .calendario,
-body.dark-mode #tabela-reservas, /* Incluindo tabelas */
+body.dark-mode #tabela-reservas,
 body.dark-mode #tabela-detalhes-reserva {
-    background-color: #242526; /* Um tom acima para indicar que são painéis */
+    background-color: #242526; 
     border: 1px solid #3a3b3c;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
 }
@@ -532,25 +526,22 @@ body.dark-mode #senha-cadastro {
 }
 body.dark-mode input:focus, 
 body.dark-mode textarea:focus {
-    border-color: #66BB6A; /* Destaque verde no foco */
+    border-color: #66BB6A; 
     box-shadow: 0 0 5px rgba(102, 187, 106, 0.6);
 }
 
-/* 3. BOTÕES GERAIS (PRINCIPAL CORREÇÃO: Botões Ghost/Outline) */
 body.dark-mode button:not(#bt-logout) {
-    /* Mudar de botão CHEIO de verde para botão GHOST/Outline */
     background-color: transparent; 
-    border: 1px solid #66BB6A; /* Borda da cor de destaque */
-    color: #66BB6A; /* Texto na cor de destaque */
+    border: 1px solid #66BB6A;
+    color: #66BB6A;
     box-shadow: none; 
 }
 body.dark-mode button:not(#bt-logout):hover {
-    background-color: rgba(102, 187, 106, 0.1); /* Efeito hover sutil */
-    color: #92E896; /* Texto um pouco mais claro no hover */
+    background-color: rgba(102, 187, 106, 0.1); 
+    color: #92E896; 
     border-color: #92E896;
 }
 
-/* Exceção: Botões de Editar/Deletar nas Listas (mantendo o preenchimento, mas mais sutil) */
 body.dark-mode .btn-acao {
     background-color: #333 !important; 
     border: 1px solid #5aa05e;
@@ -560,11 +551,10 @@ body.dark-mode .btn-acao:hover {
     background-color: #444 !important;
 }
 
-/* 4. BOTÃO CRÍTICO (Sair/Logout) - Mantendo o contraste para ação de peso */
 body.dark-mode #bt-logout.botao-critico {
-    background-color: #d32f2f !important; /* Vermelho escuro forte para ação crítica */
+    background-color: #d32f2f !important; 
     border: 1px solid #d32f2f;
-    color: #e4e6eb !important; /* Texto claro */
+    color: #e4e6eb !important; 
 }
 body.dark-mode #bt-logout.botao-critico:hover {
     background-color: #a80000 !important;
@@ -626,4 +616,106 @@ body.dark-mode #mensagem-sem-reservas {
 }
 body.dark-mode #mensagem-sem-reservas .titulo-vazio {
     color: #e4e6eb; 
+}
+
+.calendario-dias span.dia-publico:hover {
+    background-color: transparent !important;
+}
+
+.legenda-interna {
+    display: flex;
+    justify-content: center;
+    gap: 20px; 
+    margin-top: 15px; 
+    padding-top: 10px;
+    border-top: 1px solid #eee; 
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 6px; 
+}
+
+.legenda-dot {
+    width: 8px; 
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legenda-dot.disponivel {
+    border: 1px solid #ccc;
+    background-color: transparent;
+}
+
+.legenda-dot.ocupado {
+    background-color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+}
+
+.legenda-dot.hoje {
+    border: 2px solid #007bff; 
+    background-color: transparent; 
+}
+
+body.dark-mode .legenda-dot.hoje {
+    border-color: #007bff; 
+}
+
+.legenda-texto {
+    font-size: 12px;
+    color: #888; 
+    font-weight: normal;
+}
+
+body.dark-mode .legenda-interna {
+    border-top: 1px solid #3a3b3c;
+}
+body.dark-mode .legenda-texto {
+    color: #aaa;
+}
+body.dark-mode .legenda-dot.disponivel {
+    border-color: #666;
+}
+
+.rodape-publico {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 20px 25px 20px; 
+    background-color: #ffffff;
+    border-top: 1px solid #eee;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.dark-mode .rodape-publico {
+    background-color: #242526; 
+    border-top: 1px solid #3a3b3c;
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 400px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.2s;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1ebc57;
 }
