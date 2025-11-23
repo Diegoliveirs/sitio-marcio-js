@@ -719,3 +719,80 @@ body.dark-mode .rodape-publico {
 .btn-whatsapp:hover {
     background-color: #1ebc57;
 }
+
+.card-financeiro {
+    background: linear-gradient(135deg, #2c3e50, #4ca1af); 
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.card-financeiro p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-financeiro h2 {
+    margin: 10px 0 0 0;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.lista-financas {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item-financa {
+    background-color: white;
+    border-bottom: 1px solid #eee;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-financa:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.item-financa:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.financa-info strong {
+    display: block;
+    color: #333;
+}
+
+.financa-info span {
+    font-size: 12px;
+    color: #777;
+}
+
+.financa-valor {
+    font-weight: bold;
+    color: #27ae60; 
+    font-size: 16px;
+}
+
+body.dark-mode .item-financa {
+    background-color: #242526;
+    border-color: #3a3b3c;
+}
+body.dark-mode .financa-info strong {
+    color: #e4e6eb;
+}
+body.dark-mode .financa-info span {
+    color: #b0b3b8;
+}
